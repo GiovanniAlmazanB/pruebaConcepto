@@ -1,0 +1,104 @@
+/***************
+Nombre del Módulo: e-CINVESTAV Módulo de seguimiento de egresados del CINVESTAV-IPN.
+Descripción: Página de estilos.
+Nombre del desarrollador:Almazán Bombela Edwin Giovanni.
+Fecha de Desarrollo: 21-Mayo-2020
+Versión: 1.4.4
+**************
+Nombre del Modificador: Almazán Bombela Edwin Giovanni.
+Descripción de la modificación: Cambios en la documentación.
+Fecha de la Modificación: 25-Mayo-2020
+***************/
+/*Elimina los margenes y bordes por defecto de la barra de navegación*/
+.navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /*Añade un color gris y un relleno al footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    .color-me{
+      color:black;
+  }
+/*Color de la fuente de la barra de navegación*/
+  .nav.navbar-nav.navbar-right li a{
+    color:black;
+  }
+  /*Carrusel*/
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+    #titulo{
+        background-color: #f2f2f2;
+    }
+
+  /* Oculta el texto del carrusel cuando la pantalla esta a menos de 600px */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+/*Caracteristicas de los contenedores*/
+  .container {
+    margin: 0 auto;
+    max-width: calc(100% - 50px);
+    width: 1200px;
+  }
+
+    .container.medium {
+      width: 900px;
+    }
+
+    @media screen and (max-width: 1680px) {
+
+      .container {
+        width: 1200px;
+      }
+
+        .container.medium {
+          width: 900px;
+        }
+
+    }
+
+    @media screen and (max-width: 1280px) {
+
+      .container {
+        width: 960px;
+      }
+
+        .container.medium {
+          width: 720px;
+        }
+
+    }
+
+    @media screen and (max-width: 980px) {
+
+      .container {
+        width: 100%;
+      }
+
+        .container.medium {
+          width: 75%;
+        }
+
+    }
+
+    @media screen and (max-width: 736px) {
+
+      .container {
+        width: 100%;
+        max-width: calc(100% - 30px);
+      }
+
+        .container.medium {
+          width: 100%;
+        }
+
+    }
