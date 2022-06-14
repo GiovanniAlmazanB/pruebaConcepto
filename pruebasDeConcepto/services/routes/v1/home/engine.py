@@ -6,16 +6,10 @@ from utilities.bigquery import priceIndex, otherPromos, productPromos, bigQuery
 
 BigQuery_Client = bigquery.Client()
 
-def graficasPrice():
+def priceDayofWeek():
         lista = []
-        response = priceIndex()
+        response, maxi, min, avg = priceIndex()
         print(response)
-        minimum = min(response)
-        maximum = max(response)
-        sum = sum(response)
-        length = len(response)
-        average = sum/length
-        
        
         response = {
                     "cols": [
@@ -25,12 +19,10 @@ def graficasPrice():
                     {"id":"","label":"Minimun Price","pattern":"","type":"number"}
                     ],
                 "rows": [
-                    {"c":[{"v":"Monday","f":""},{"v":minimum,"f":""}, {"v":maximum,"f":""}, {"v":average,"f":""}]},
+                    {"c":[{"v":"Monday","f":""},{"v":min,"f":""}, {"v":maxi,"f":""}, {"v":avg,"f":""}]},
                 ]
                 }
             
-        lista.append(list(response))
-        response = json.dumps(list)
         print(response)
         return response
     
@@ -87,10 +79,9 @@ def priceDayOfWeek():
     }
     lista.append(response)
     lista = json.dumps(lista)
-    
     return response
 
-def otherPromos():
+def otherPromotion():
     lista = []
     response ={
         "cols": [
@@ -106,5 +97,3 @@ def otherPromos():
     lista = json.dumps(lista)
     
     return response
-
-graficasPrice()

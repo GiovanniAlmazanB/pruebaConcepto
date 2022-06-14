@@ -12,16 +12,23 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "C://Users/USER/Documents/keysAtl
 def priceIndex():
     client=bigquery.Client()
     response = []
-    query_job=client.query("""
-        SELECT * FROM `ecomm-mx-jla054-modelorama.views_bi.vw_product_prices` LIMIT 20
+    min = client.query("""
+        SELECT min(product_current_price) FROM `ecomm-mx-jla054-modelorama.views_bi.vw_product_prices` 
             """)
-    results=query_job.result()
-    for i in results: 
-        response.append(i)
-    print(response)
-    return response
+    min = min.result()
+    maxi = client.query("""
+        SELECT max(product_current_price) FROM `ecomm-mx-jla054-modelorama.views_bi.vw_product_prices` 
+            """)
+    maxi = maxi.result()
+    avg = client.query("""
+        SELECT avg(product_current_price) FROM `ecomm-mx-jla054-modelorama.views_bi.vw_product_prices` 
+            """)
+    avg = avg.result()
+    
+    print(response, maxi, min, avg)
+    return response, maxi, min, avg
 
-def otherPromos(retailer):
+def otherPromos():
     client=bigquery.Client()
     response = []
     query_job = client.query(f"""
