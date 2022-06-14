@@ -1,0 +1,136 @@
+
+{% extends "base.html" %}
+{% block title %}
+Graficas
+{% endblock %}
+{% block content %}
+<div class="container">
+  <!-- Logotipo -->
+  <h2><img src="{{ url_for('static', filename='img/atlantia-search-investigacion-de-mercado-marketing-logo.png') }}" class="img-responsive" style="width:7%" alt="Image">
+      <center>Promo Analisis
+  </h2>
+  </center>
+
+  <div class="row">
+      <div class="col-md-12"><br>
+          <!-- Creación del formulario -->
+          <form class="form-inline" method="POST" action="/estadisticas" id="formulario1">
+              <div class="form-group">
+                  <p>Seleccione una o más opciones de los filtros:</p>
+                  <div class="input-group">
+                      <!-- Llenado del selectfield Unidad -->
+                      <span class="input-group-addon">Date</span>
+                      <select name="unidad1" class="selectpicker form-control">
+                          <option value="" disabled="disabled" selected>Seleccione una Fecha...</option>
+                          {% for u in unidad %}
+                          <option value="{{ u }}">{{ u }}</option>
+                          {% endfor %}
+                      </select>
+
+                      <!-- Llenado del Aréa de Investigación -->
+                      <span class="input-group-addon">SKU'S</span>
+                      <select name="areainv1" class="selectpicker form-control">
+                          <option value="" disabled selected>Seleccione una SKU...</option>
+                          {% for u in areainv %}
+                          <option value="{{ u }}">{{ u }}</option>
+                          {% endfor %}
+                      </select>
+
+                      <!-- Llenado del selectfield Departamento -->
+                      <span class="input-group-addon">Retailer</span>
+                      <select name="departamento1" class="selectpicker form-control">
+                          <option value="" disabled selected>Seleccione un retailer...</option>
+                          {% for u in departamento %}
+                          <option value="{{ u }}">{{ u }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                  <br><br>
+                  <div class="form-group">
+                      <div class="input-group">
+                          <!-- Llenado del selectfield Sector -->
+                          <span class="input-group-addon">Pack</span>
+                          <select name="sector1" class="selectpicker form-control">
+                              <option value="" disabled selected>Seleccione el Pack...</option>
+                              {% for u in sector %}
+                              <option value="{{ u }}">{{ u }}</option>
+                              {% endfor %}
+                          </select>
+
+            
+
+                      </div>
+          </form>
+
+      </div>
+ </div></div>
+  </div>
+<!--Librerías-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!--Pintado de la gráfica-->
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+  //Función para mandar a llamar datos en formato json. 
+  var jsonData = $.ajax({
+      url: "http://192.168.0.13:8080/pie",
+      dataType: "json",
+      async: false
+      }).responseText;
+  
+  var options = {
+        title:'PIE CHART',
+        is3D: true,
+  };    
+  var data = new google.visualization.DataTable(jsonData);
+  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+  chart.draw(data, {width: 550, height: 360}, options);
+}
+
+</script><center>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Genre', 'Price Promos', 'Other Promos', { role: 'annotation' } ],
+        ['Monday', 20742, 2699, ''],
+        ['Tuesday', 21934, 2500, ''],
+        ['Wednes', 21799, 2252,''],
+        ['Thursday', 20429, 2474,''],
+        ['Friday', 21293, 2455, ''],
+        ['Saturday', 22224, 2635,  ''],
+        ['Sunday', 20153, 2376,  '']
+      ]);
+
+      var options = {
+        width: 600,
+        height: 400,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '75%' },
+        isStacked: true,
+      };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script></center>
+</head>
+
+<!--Mandado a llamar-->
+
+<!--Mandado a llamar de las gráficas-->
+      <div id="chart_div"></div></center>
+      </div>
+      <div class="col">
+        <div id="chart_div1"></div></center>
+      </div>
+      <center><div id="columnchart_material" style="width: 800px; height: 500px;"></div></center>
+    </div>
+</body>
+{% endblock %}
